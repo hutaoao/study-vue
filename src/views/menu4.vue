@@ -1,7 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
 	<div>
 		<!-- sync修饰符 -->
-		<a-slider :isShow.sync="show" @open="openSlider" @close="closeSlider">
+		<a-slider :isShow.sync="show" @open="openSlider" @close="closeSlider" :passData="dataS">
 			<!-- v-slot 指令自 Vue 2.6.0 起被引入，提供更好的支持 slot 和 slot-scope 特性的 API 替代方案。 -->
             <!-- v-slot可以缩写成 # -->
 			<template v-slot:slot1>
@@ -20,7 +20,17 @@
 	    data(){
 	    	return {
 		    	show:true,
-		    	count:'大家好'
+		    	count:'大家好',
+                dataS:[
+                    {
+                        title:'父组件标题1',
+                        count:'父组件内容1'
+                    },
+                    {
+                        title:'父组件标题2',
+                        count:'父组件内容2'
+                    },
+                ]
 			}
 		},
 		components:{

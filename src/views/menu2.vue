@@ -1,51 +1,39 @@
 <template>
     <div>
-    	<h1>{{msg}}</h1>
+        <h1>{{msg}}</h1>
         <h2>{{$store.state.count}}--{{count}}</h2>
+        <h3>{{number}}--{{oldNumber}}</h3>
         <p>
-			<button @click="$store.commit('add',10)">增加</button>
-			<button @click="reduce">减少</button>
-		</p>
-		<!--<p>-->
-			<!--<button @click="addActions">增加</button>-->
-			<!--<button @click="reduceActions">减少</button>-->
-		<!--</p>-->
+            <button @click="$store.commit('add',10)">增加</button>
+            <button @click="$store.commit('reduce')">减少</button>
+            <button @click="number++">计算属性</button>
+        </p>
     </div>
 </template>
 
 <script>
-	import store from '@/store';
-	import {mapState,mapMutations,mapGetters} from 'vuex';
-	export default {
-	    data(){
-	    	return {
-		    	msg:'vuex学习'
-			}
-		},
-		//一、通过computed的计算属性直接赋值
-		/*
-		computed:{
-			count(){
-				return this.$store.state.count;
-			}
-		}*/
-		//二、通过mapState的对象来赋值
-		/*computed:mapState({
-			count:state=>state.count
-		})*/
-		//三、通过mapState的数组来赋值--推荐使用
-		// computed:mapState(['count']),
+    // import store from '@/store';
+    // import {mapState, mapMutations, mapGetters} from 'vuex';
 
-		computed:{
-			...mapState(['count']),
-			/*count(){
-				this.$store.getters.count;
-			}*/
-			...mapGetters(['count'])
-		},
+    export default {
+        data() {
+            return {
+                msg: 'vuex学习',
+                number: 100
+            }
+        },
+        computed: {//计算属性 响应式依赖进行缓存的 相关响应式依赖发生改变时它们会重新求值
+            count(){
+                return this.$store.state.count
+            },
+            oldNumber(){
+                return this.number
+            }
+        },
+        methods: {
 
-		methods:mapMutations(['add','reduce'])
-	}
+        }
+    }
 </script>
 
 <style scoped>

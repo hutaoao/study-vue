@@ -36,12 +36,11 @@
 </template>
 
 <script>
-    import eventBus from '../assets/js/eventBus'
     export default {
         name: "",
         methods:{
             selectMenu(index){
-                eventBus.$emit('passIndex',index);
+                this.$store.commit('setActiveName',index);
             }
         }
     }
